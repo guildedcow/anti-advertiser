@@ -32,5 +32,11 @@ async def on_message(message):
         await message.channel.send("no self advertising.")
 
 
+@client.event
+async def on_message_edit(before, after):
+    if "discord.gg" in after.content:
+        await after.delete()
+        await after.channel.send("no self advertising.")
+
 
 client.run(confidental.token)  # replace with whatever discord token you want to use
