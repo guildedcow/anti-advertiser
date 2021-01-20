@@ -21,20 +21,22 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    lowermessage = message.content.lower()
     if message.author == client.user:
-        if "no self advertising" in message.content:
+        if "no self advertising" in lowermessage:
             await asyncio.sleep(3)
             await message.delete()
         return
 
-    if 'discord.gg' in message.content:
+    if 'discord.gg' in lowermessage:
         await message.delete()
         await message.channel.send("no self advertising.")
 
 
 @client.event
 async def on_message_edit(before, after):
-    if "discord.gg" in after.content:
+    lowermessage = after.content.lower()
+    if "discord.gg" in lowermessage:
         await after.delete()
         await after.channel.send("no self advertising.")
 
